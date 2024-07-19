@@ -1,0 +1,16 @@
+Package: ggtintshade
+Type: Package
+Title: Tinting and shading aesthetics for ggplot2
+Version: 0.1.0
+Author: William Kumler (wkumler@uw.edu)
+Maintainer: William Kumler <wkumler@uw.edu>
+Description: Tinting and shading aesthetics for ggplot2.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    ggplot2,
+    rlang,
+    scales,
+    colorspace
+RoxygenNote: 7.3.1
