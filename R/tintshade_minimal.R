@@ -90,6 +90,33 @@ scale_tintshade_discrete <- function(..., range = c(0.2, 0.8)) {
   )
 }
 
+# Repeated for boxplots ----
+GeomBoxplotTintshade <- ggproto(
+  "GeomBoxplotTintshade", GeomBoxplot,
+  tintshade_cache = NULL,
+  use_defaults = function(self, data, params = list(), ...) {
+    data <- ggproto_parent(GeomBoxplot, self)$use_defaults(data, params, ...)
+    if (!is.null(self$tintshade_cache) && is.null(data$.id) && !is.null(data$tintshade)) {
+      t <- local_tint(data$colour, data$tintshade)
+      data$colour <- tint(data$colour, t)
+      self$tintshade_cache$lookup[cache_key(data$tintshade)] <- data$colour
+    }
+    data
+  }
+)
+GeomBoxplotTintshade$default_aes$tintshade <- NA
+
+geom_boxplot_tintshade <- function(mapping = NULL, data = NULL, ..., size = NULL) {
+  cache <- new.env(parent = emptyenv())
+  cache$lookup <- character(0)
+  geom <- ggproto(NULL, GeomBoxplot, tintshade_cache = cache)
+  layer(
+    geom = geom, mapping = mapping, data = data,
+    stat = "identity", position = "identity",
+    params = list(size = size, ...)
+  )
+}
+
 # Reprex ----
 metab_data <- data.frame(
   metab = rep(c("Alanine", "Threonine", "Glycine",
@@ -105,3 +132,12 @@ ggplot(metab_data) +
     aes(x = tripl, y = area, colour = metab_group, tintshade = metab),
     size = 4
   )
+metab_data$metab <- factor(metab_data$metab, levels = unique(metab_data$metab))
+ggplot(metab_data) +
+  geom_point_tintshade(
+    aes(x = tripl, y = area, colour = metab_group, tintshade = metab),
+    size = 4
+  )
+
+ggplot(metab_data) +
+  geom_boxplot_tintshade(aes(x=metab_group, y=area, color=metab_group, tintshade = metab))
