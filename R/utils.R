@@ -44,11 +44,13 @@ cache_key <- function(x) {
   sprintf("%.10f", x)
 }
 
-# A fresh, layer-local cache. `sets[[aes]][[key]]` collects the distinct final
-# colours seen for each tintshade value, per hue aesthetic.
+# A fresh, layer-local cache. `colours[[aes]]` is a named vector mapping each
+# tintshade value (via cache_key()) to its tinted hex -- the one thing the guide
+# cannot recompute for itself. Everything else (crossed detection, NA breaks) is
+# the guide's job.
 new_tint_cache <- function() {
   cache <- new.env(parent = emptyenv())
-  cache$sets <- list()
+  cache$colours <- list()
   cache
 }
 

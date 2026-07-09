@@ -47,10 +47,12 @@ tint_layer <- function(data, cache, self) {
     final[ok] <- tint(hue[ok], t[ok])
     data[[aes]] <- final
 
-    keys <- cache_key(data$tintshade[ok])
-    for (k in unique(keys)) {
-      cache$sets[[aes]][[k]] <- unique(c(cache$sets[[aes]][[k]], final[ok][keys == k]))
-    }
+    # Record only tintshade value -> tinted hex. Nested values map to one hue
+    # (unambiguous); crossed values map to several, and the guide renders those
+    # greyscale anyway, so an arbitrary representative is fine.
+    m <- cache$colours[[aes]] %||% character(0)
+    m[cache_key(data$tintshade[ok])] <- final[ok]
+    cache$colours[[aes]] <- m
   }
   data
 }
