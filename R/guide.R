@@ -81,20 +81,21 @@ recolour_key <- function(key, cache, crossed, type) {
     if (is.null(key[[aes]])) {
       next
     }
-    orig <- as.character(key[[aes]])
+    col_map <- cache$colours[[aes]]
+    cross <- crossed[[aes]]
     key[[aes]] <- vapply(seq_along(vk), function(i) {
       val <- key$tintshade[i]
-      if (is.na(val)) {
-        return(neutral_tint(0.5))
-      }
-      hex <- cache$colours[[aes]][[vk[i]]]
-      is_crossed <- isTRUE(crossed[[aes]][[vk[i]]])
-      if (is.null(hex)) {
-        orig[i]
-      } else if (type == "crossed" || (type == "auto" && is_crossed)) {
-        neutral_tint(val)
+      # `%in%` before `[[` avoids "subscript out of bounds": `[[` on a named
+      # vector with an absent name errors (unlike a list). Grey (at the key's
+      # lightness) for an NA break, a value with no cached hue (e.g. a
+      # between-data continuous break), a crossed level, or a forced `type`;
+      # otherwise the cached nested hue.
+      has_hue <- !is.na(val) && vk[i] %in% names(col_map)
+      is_crossed <- vk[i] %in% names(cross) && isTRUE(unname(cross[[vk[i]]]))
+      if (!has_hue || type == "crossed" || (type == "auto" && is_crossed)) {
+        neutral_tint(if (is.na(val)) 0.5 else val)
       } else {
-        hex
+        col_map[[vk[i]]]
       }
     }, character(1))
   }
