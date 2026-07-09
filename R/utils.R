@@ -11,9 +11,14 @@ to_hex <- function(x) {
 # Tint a base colour by `t` in [0, 1]: 0 = black, 0.5 = the base colour,
 # 1 = white. Values outside [0, 1] are clamped so an out-of-range scale cannot
 # overflow into spurious hues. Uses perceptual lightness, which keeps hue fixed
-# and behaves the same across colours.
+# and behaves the same across colours. Any alpha on the base colour is preserved
+# (opaque colours stay 6-digit hex).
 tint <- function(base, t) {
-  colorspace::lighten(to_hex(base), pmax(-1, pmin(1, 2 * t - 1)))
+  rgba <- grDevices::col2rgb(base, alpha = TRUE)
+  hex <- grDevices::rgb(rgba[1, ], rgba[2, ], rgba[3, ], maxColorValue = 255)
+  out <- colorspace::lighten(hex, pmax(-1, pmin(1, 2 * t - 1)))
+  a <- rgba[4, ]
+  unname(ifelse(a < 255L, paste0(out, sprintf("%02X", a)), out))
 }
 
 # A neutral, hueless tint used for crossed-design legend keys.
