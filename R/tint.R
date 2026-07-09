@@ -17,8 +17,9 @@ tint_targets <- function(data) {
 }
 
 # Tint the hue aesthetic(s) of `data` and fill `cache`. `self` is the geom, used
-# only for cli messages.
-tint_layer <- function(data, cache, self) {
+# only for cli messages. `absolute = TRUE` (a fixed `tintshade =` parameter)
+# applies the value directly as a lightness; otherwise it is a per-group rank.
+tint_layer <- function(data, cache, self, absolute = FALSE) {
   targets <- tint_targets(data)
   if (length(targets) == 0) {
     return(data)
@@ -27,9 +28,13 @@ tint_layer <- function(data, cache, self) {
 
   for (aes in targets) {
     hue <- data[[aes]]
-    t <- local_tint(hue, data$tintshade)
+    t <- if (absolute){
+      data$tintshade
+    } else {
+      local_tint(hue, data$tintshade)
+    }
 
-    if (n_tint > 1 && length(unique(stats::na.omit(hue))) == 1) {
+    if (!absolute && n_tint > 1 && length(unique(stats::na.omit(hue))) == 1) {
       cli::cli_inform(c(
         "{.fn {snake_class(self)}}: all {.field tintshade} values fall within a single {.field {aes}} group.",
         i = "The tint ramp spans one group globally. Map {.field {aes}} to a grouping variable for per-group ramps."

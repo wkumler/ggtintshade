@@ -13,10 +13,12 @@ make_tintshade_geom <- function(base_geom) {
       )
       cache <- self$tintshade_cache
       # Tint real panel data only: legend keys carry a `.id` column, and a layer
-      # may not map tintshade at all (the column is then all-NA).
+      # may not map tintshade at all (the column is then all-NA). A `tintshade =`
+      # value passed as a parameter (present in `params`) is an absolute
+      # lightness rather than a per-group rank.
       if (!is.null(cache) && is.null(data[[".id"]]) &&
           is.numeric(data$tintshade) && !all(is.na(data$tintshade))) {
-        data <- tint_layer(data, cache, self)
+        data <- tint_layer(data, cache, self, absolute = !is.null(params$tintshade))
       }
       data
     }
