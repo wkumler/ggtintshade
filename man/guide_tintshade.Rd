@@ -15,9 +15,10 @@ guide_tintshade(
 
 \item{type}{How to colour the legend keys:
 \itemize{
-\item \code{"auto"} (default): a key is drawn in its hue when its tintshade value
-maps to a single colour (a nested design) and in neutral grey when it
-maps to several (a crossed design, where lightness is hue-independent).
+\item \code{"auto"} (default): a key is drawn in its hue when its tintshade level
+maps to a single hue (a nested design) and in neutral grey when it
+co-occurs with several (a crossed design, where lightness is
+hue-independent).
 \item \code{"unique"}: always use the hue.
 \item \code{"crossed"}: always use neutral grey.
 }}
