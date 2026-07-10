@@ -11,8 +11,8 @@ disambiguate them overall. It supports both nested and crossed designs.
 
 ## Installation
 
-You can install the most recent stable version of ggh4x from CRAN as
-follows:
+You can install the most recent stable version of gghtintshade from CRAN
+(soon!) as follows:
 
 ``` r
 install.packages("ggtintshade")
@@ -58,7 +58,7 @@ ggplot(metab_data) +
 This is a nice example of **nested** data, where each individual entry
 belongs to a single group. `ggtintshade` also handles **crossed** data,
 where each shade should map into multiple groups. A good example of this
-is your DND-style “alignment” chart.
+is your D&D-style “alignment” chart.
 
 ``` r
 align_data <- data.frame(
@@ -133,12 +133,14 @@ temp.data = data.frame (
 init_alpha <- ggplot(temp.data, aes(x = Species, y = Proportion, fill = Status, alpha = Species)) +
   geom_bar(stat='identity', position = position_dodge(width = 0.73), width=.67) +
   facet_grid(Sex ~ .) +
-  scale_fill_manual(name = "Status", labels = c("An","Bac"), values = c("#86a681","#0a3e03"))
+  scale_fill_manual(name = "Status", labels = c("An","Bac"), values = c("#86a681","#0a3e03")) +
+  ggtitle("Without ggtintshade")
 new_tinted <- ggplot(temp.data, aes(x = Species, y = Proportion, fill = Species, tintshade = Status)) +
   geom_bar_tintshade(stat='identity', position = position_dodge(width = 0.73), width=.67) +
   facet_grid(Sex ~ .) +
   scale_fill_manual(name = "Status", labels = c("An","Bac"), values = c("#cf944c","#0a3e03")) +
-  scale_tintshade_discrete(range = c(0.3, 0.7))
+  scale_tintshade_discrete(range = c(0.3, 0.7)) +
+  ggtitle("With ggtintshade")
 init_alpha + new_tinted
 #> Warning: Using alpha for a discrete variable is not advised.
 ```
@@ -158,10 +160,12 @@ d <- data.frame(
 
 init_alpha <- ggplot(d) +
   geom_path(aes(x, y, color=grp), linewidth=2, lineend=0) +
-  geom_path(aes(x, y, group=grp, alpha=z), linewidth=2, lineend=0)
+  geom_path(aes(x, y, group=grp, alpha=z), linewidth=2, lineend=0) +
+  ggtitle("Without ggtintshade")
 new_tinted <- ggplot(d) + 
   geom_path_tintshade(aes(x, y, color=grp, tintshade=z), linewidth=2, lineend=0) +
-  scale_tintshade_continuous(range = c(0.5, 0))
+  scale_tintshade_continuous(range = c(0.5, 0)) +
+  ggtitle("With ggtintshade")
 init_alpha + new_tinted
 ```
 
