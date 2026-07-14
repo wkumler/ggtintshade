@@ -22,6 +22,18 @@
 #' )
 #' ggplot(df, aes(x, y, colour = g, tintshade = item)) +
 #'   geom_point_tintshade(size = 4)
+#'
+#' ggplot(diamonds) +
+#'   geom_bar_tintshade(aes(x=cut, fill = cut, tintshade = clarity), color="black")
+#'
+#' mpgsub <- head(mpg, 60)
+#' mpgsub$model <- factor(mpgsub$model, levels=unique(mpgsub$model))
+#' ggplot(mpgsub, aes(displ, hwy, colour = manufacturer, tintshade = model)) +
+#'   geom_point_tintshade(size = 3)
+#'
+#' ggplot(penguins[!is.na(penguins$bill_len),]) +
+#'   geom_point_tintshade(aes(x=bill_len, y=bill_dep, fill=species, tintshade=sex),
+#'                        pch=21, color="black", size=3)
 NULL
 
 # --- internal geom objects (the factory calls) -------------------------------
