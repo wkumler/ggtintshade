@@ -162,7 +162,7 @@ ggplot(penguins) +
                        pch=21, color="black", size=3)
 ```
 
-This last example also shows how NA tintshade values are mapped to the untinted shade, which could cause some confusion.
+This last example also shows how NA tintshade values are mapped to the untinted shade, which could cause some confusion. The recommended approach in this case is to ensure that the NA values are also mapped to an additional aesthetic, e.g. shape.
 
 ## Internals
 

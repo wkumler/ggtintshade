@@ -193,7 +193,9 @@ ggplot(penguins) +
 <img src="man/figures/README-penguins-1.png" width="80%" style="display: block; margin: auto;" />
 
 This last example also shows how NA tintshade values are mapped to the
-untinted shade, which could cause some confusion.
+untinted shade, which could cause some confusion. The recommended
+approach in this case is to ensure that the NA values are also mapped to
+an additional aesthetic, e.g. shape.
 
 ## Internals
 
@@ -216,4 +218,4 @@ they inherit naturally from an existing `ggplot2` function.
 
 Issues: <https://github.com/wkumler/ggtintshade/issues>
 
-README last built on 2026-07-10
+README last built on 2026-07-14
