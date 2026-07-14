@@ -31,7 +31,7 @@ make_tintshade_geom <- function(base_geom) {
 # fresh geom instance with its own cache, so layers never share state. The
 # `stat`/`position` defaults are baked into the returned function's formals so
 # that generated documentation shows their real values.
-make_geom_constructor <- function(geom, default_stat, default_position) {
+make_geom_constructor <- function(geom, default_stat="identity", default_position="identity") {
   force(geom)
   fun <- function(mapping = NULL, data = NULL, stat, position, ..., na.rm = FALSE,
                   show.legend = NA, inherit.aes = TRUE) {

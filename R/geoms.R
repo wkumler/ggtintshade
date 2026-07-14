@@ -3,7 +3,7 @@
 #' @description
 #' Drop-in tintshade variants of common ggplot2 geoms. Map `colour` or `fill`
 #' to a hue and `tintshade` to a within-hue lightness; whichever of
-#' `colour`/`fill` carries the hue is tinted automatically (both, if both are
+#' `colour`/`fill` carries the hue is tinted automatically (or both, if both are
 #' mapped). The plotted layer and its legend stay in sync.
 #'
 #' @param mapping,data,stat,position,na.rm,show.legend,inherit.aes,... Standard
@@ -52,92 +52,92 @@ GeomPointrangeTintshade <- make_tintshade_geom(ggplot2::GeomPointrange)
 
 #' @rdname geom_tintshade
 #' @export
-geom_point_tintshade <- make_geom_constructor(GeomPointTintshade, "identity", "identity")
+geom_point_tintshade <- make_geom_constructor(GeomPointTintshade)
 
 #' @rdname geom_tintshade
 #' @export
-geom_jitter_tintshade <- make_geom_constructor(GeomPointTintshade, "identity", "jitter")
+geom_jitter_tintshade <- make_geom_constructor(GeomPointTintshade, default_position = "jitter")
 
 #' @rdname geom_tintshade
 #' @export
-geom_line_tintshade <- make_geom_constructor(GeomLineTintshade, "identity", "identity")
+geom_line_tintshade <- make_geom_constructor(GeomLineTintshade)
 
 #' @rdname geom_tintshade
 #' @export
-geom_path_tintshade <- make_geom_constructor(GeomPathTintshade, "identity", "identity")
+geom_path_tintshade <- make_geom_constructor(GeomPathTintshade)
 
 #' @rdname geom_tintshade
 #' @export
-geom_step_tintshade <- make_geom_constructor(GeomStepTintshade, "identity", "identity")
+geom_step_tintshade <- make_geom_constructor(GeomStepTintshade)
 
 #' @rdname geom_tintshade
 #' @export
-geom_area_tintshade <- make_geom_constructor(GeomAreaTintshade, "align", "stack")
+geom_area_tintshade <- make_geom_constructor(GeomAreaTintshade, default_stat = "align", default_position = "stack")
 
 #' @rdname geom_tintshade
 #' @export
-geom_ribbon_tintshade <- make_geom_constructor(GeomRibbonTintshade, "identity", "identity")
+geom_ribbon_tintshade <- make_geom_constructor(GeomRibbonTintshade)
 
 #' @rdname geom_tintshade
 #' @export
-geom_bar_tintshade <- make_geom_constructor(GeomBarTintshade, "count", "stack")
+geom_bar_tintshade <- make_geom_constructor(GeomBarTintshade, default_stat = "count", default_position = "stack")
 
 #' @rdname geom_tintshade
 #' @export
-geom_col_tintshade <- make_geom_constructor(GeomColTintshade, "identity", "stack")
+geom_col_tintshade <- make_geom_constructor(GeomColTintshade, default_position = "stack")
 
 #' @rdname geom_tintshade
 #' @export
-geom_histogram_tintshade <- make_geom_constructor(GeomBarTintshade, "bin", "stack")
+geom_histogram_tintshade <- make_geom_constructor(GeomBarTintshade, default_stat = "bin", default_position = "stack")
 
 #' @rdname geom_tintshade
 #' @export
-geom_boxplot_tintshade <- make_geom_constructor(GeomBoxplotTintshade, "boxplot", "dodge2")
+geom_boxplot_tintshade <- make_geom_constructor(GeomBoxplotTintshade, default_stat = "boxplot", default_position = "dodge2")
 
 #' @rdname geom_tintshade
 #' @export
-geom_violin_tintshade <- make_geom_constructor(GeomViolinTintshade, "ydensity", "dodge")
+geom_violin_tintshade <- make_geom_constructor(GeomViolinTintshade, default_stat = "ydensity", default_position = "dodge")
 
 #' @rdname geom_tintshade
 #' @export
-geom_tile_tintshade <- make_geom_constructor(GeomTileTintshade, "identity", "identity")
+geom_tile_tintshade <- make_geom_constructor(GeomTileTintshade)
 
 #' @rdname geom_tintshade
 #' @export
-geom_raster_tintshade <- make_geom_constructor(GeomRasterTintshade, "identity", "identity")
+geom_raster_tintshade <- make_geom_constructor(GeomRasterTintshade)
 
 #' @rdname geom_tintshade
 #' @export
-geom_rect_tintshade <- make_geom_constructor(GeomRectTintshade, "identity", "identity")
+geom_rect_tintshade <- make_geom_constructor(GeomRectTintshade)
 
 #' @rdname geom_tintshade
 #' @export
-geom_polygon_tintshade <- make_geom_constructor(GeomPolygonTintshade, "identity", "identity")
+geom_polygon_tintshade <- make_geom_constructor(GeomPolygonTintshade)
 
 #' @rdname geom_tintshade
 #' @export
-geom_segment_tintshade <- make_geom_constructor(GeomSegmentTintshade, "identity", "identity")
+geom_segment_tintshade <- make_geom_constructor(GeomSegmentTintshade)
 
 #' @rdname geom_tintshade
 #' @export
-geom_text_tintshade <- make_geom_constructor(GeomTextTintshade, "identity", "identity")
+geom_text_tintshade <- make_geom_constructor(GeomTextTintshade)
 
 #' @rdname geom_tintshade
 #' @export
-geom_label_tintshade <- make_geom_constructor(GeomLabelTintshade, "identity", "identity")
+geom_label_tintshade <- make_geom_constructor(GeomLabelTintshade)
 
 #' @rdname geom_tintshade
 #' @export
-geom_crossbar_tintshade <- make_geom_constructor(GeomCrossbarTintshade, "identity", "identity")
+geom_crossbar_tintshade <- make_geom_constructor(GeomCrossbarTintshade)
 
 #' @rdname geom_tintshade
 #' @export
-geom_errorbar_tintshade <- make_geom_constructor(GeomErrorbarTintshade, "identity", "identity")
+geom_errorbar_tintshade <- make_geom_constructor(GeomErrorbarTintshade)
 
 #' @rdname geom_tintshade
 #' @export
-geom_linerange_tintshade <- make_geom_constructor(GeomLinerangeTintshade, "identity", "identity")
+geom_linerange_tintshade <- make_geom_constructor(GeomLinerangeTintshade)
 
 #' @rdname geom_tintshade
 #' @export
-geom_pointrange_tintshade <- make_geom_constructor(GeomPointrangeTintshade, "identity", "identity")
+geom_pointrange_tintshade <- make_geom_constructor(GeomPointrangeTintshade)

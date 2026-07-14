@@ -41,8 +41,8 @@ geom_point_tintshade(
 geom_jitter_tintshade(
   mapping = NULL,
   data = NULL,
-  stat = "identity",
-  position = "jitter",
+  stat = "jitter",
+  position = "identity",
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -291,7 +291,7 @@ A ggplot2 layer.
 \description{
 Drop-in tintshade variants of common ggplot2 geoms. Map \code{colour} or \code{fill}
 to a hue and \code{tintshade} to a within-hue lightness; whichever of
-\code{colour}/\code{fill} carries the hue is tinted automatically (both, if both are
+\code{colour}/\code{fill} carries the hue is tinted automatically (or both, if both are
 mapped). The plotted layer and its legend stay in sync.
 }
 \examples{
@@ -303,6 +303,18 @@ df <- data.frame(
 )
 ggplot(df, aes(x, y, colour = g, tintshade = item)) +
   geom_point_tintshade(size = 4)
+
+ggplot(diamonds) +
+  geom_bar_tintshade(aes(x=cut, fill = cut, tintshade = clarity), color="black")
+
+mpgsub <- head(mpg, 60)
+mpgsub$model <- factor(mpgsub$model, levels=unique(mpgsub$model))
+ggplot(mpgsub, aes(displ, hwy, colour = manufacturer, tintshade = model)) +
+  geom_point_tintshade(size = 3)
+
+ggplot(penguins[!is.na(penguins$bill_len),]) +
+  geom_point_tintshade(aes(x=bill_len, y=bill_dep, fill=species, tintshade=sex),
+                           pch=21, color="black", size=3)
 }
 \seealso{
 \code{\link[=scale_tintshade_discrete]{scale_tintshade_discrete()}}, \code{\link[=guide_tintshade]{guide_tintshade()}}
