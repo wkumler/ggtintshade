@@ -6,9 +6,19 @@
 \alias{scale_tintshade_continuous}
 \title{Lightness (tintshade) scales}
 \usage{
-scale_tintshade_discrete(..., range = c(0.2, 0.8), aesthetics = "tintshade")
+scale_tintshade_discrete(
+  ...,
+  range = c(0.2, 0.8),
+  aesthetics = "tintshade",
+  guide = guide_tintshade()
+)
 
-scale_tintshade_continuous(..., range = c(0.2, 0.8), aesthetics = "tintshade")
+scale_tintshade_continuous(
+  ...,
+  range = c(0.2, 0.8),
+  aesthetics = "tintshade",
+  guide = guide_tintshade()
+)
 }
 \arguments{
 \item{...}{Passed to \code{\link[ggplot2:discrete_scale]{ggplot2::discrete_scale()}} or
@@ -18,6 +28,9 @@ scale_tintshade_continuous(..., range = c(0.2, 0.8), aesthetics = "tintshade")
 \code{c(0.2, 0.8)} (dark to pale, base hue in the middle).}
 
 \item{aesthetics}{Aesthetic this scale applies to. Defaults to \code{"tintshade"}.}
+
+\item{guide}{The legend guide. Defaults to \code{\link[=guide_tintshade]{guide_tintshade()}}; pass a
+configured \code{guide_tintshade(...)} to customise the legend.}
 }
 \value{
 A ggplot2 scale object.

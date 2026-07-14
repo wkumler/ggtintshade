@@ -7,6 +7,14 @@
 guide_tintshade(
   title = ggplot2::waiver(),
   type = c("auto", "unique", "crossed"),
+  theme = NULL,
+  position = NULL,
+  direction = NULL,
+  override.aes = list(),
+  nrow = NULL,
+  ncol = NULL,
+  reverse = FALSE,
+  order = 0,
   ...
 )
 }
@@ -23,7 +31,35 @@ hue-independent).
 \item \code{"crossed"}: always use neutral grey.
 }}
 
-\item{...}{Passed to \code{\link[ggplot2:guide_legend]{ggplot2::guide_legend()}}.}
+\item{theme}{A \code{\link[ggplot2:theme]{theme}} object to style the guide individually or
+differently from the plot's theme settings. The \code{theme} argument in the
+guide partially overrides, and is combined with, the plot's theme.
+Arguments that apply to a single legend are respected, most of which have
+the \code{legend}-prefix. Arguments that apply to combined legends
+(the legend box) are ignored, including \code{legend.position},
+\verb{legend.justification.*}, \code{legend.location} and \verb{legend.box.*}.}
+
+\item{position}{A character string indicating where the legend should be
+placed relative to the plot panels.
+One of "top", "right", "bottom", "left", or "inside".}
+
+\item{direction}{A character string indicating the direction of the guide.
+One of "horizontal" or "vertical".}
+
+\item{override.aes}{A list specifying aesthetic parameters of legend key.
+See details and examples.}
+
+\item{nrow, ncol}{The desired number of rows and column of legends
+respectively.}
+
+\item{reverse}{logical. If \code{TRUE} the order of legends is reversed.}
+
+\item{order}{positive integer less than 99 that specifies the order of
+this guide among multiple guides. This controls the order in which
+multiple guides are displayed, not the contents of the guide itself.
+If 0 (default), the order is determined by a secret algorithm.}
+
+\item{...}{Additional arguments passed on to \code{\link[ggplot2:new_guide]{ggplot2::new_guide()}}.}
 }
 \value{
 A guide object.

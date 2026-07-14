@@ -41,8 +41,8 @@ geom_point_tintshade(
 geom_jitter_tintshade(
   mapping = NULL,
   data = NULL,
-  stat = "jitter",
-  position = "identity",
+  stat = "identity",
+  position = "jitter",
   ...,
   na.rm = FALSE,
   show.legend = NA,
@@ -314,7 +314,7 @@ ggplot(mpgsub, aes(displ, hwy, colour = manufacturer, tintshade = model)) +
 
 ggplot(penguins[!is.na(penguins$bill_len),]) +
   geom_point_tintshade(aes(x=bill_len, y=bill_dep, fill=species, tintshade=sex),
-                           pch=21, color="black", size=3)
+                       pch=21, color="black", size=3)
 }
 \seealso{
 \code{\link[=scale_tintshade_discrete]{scale_tintshade_discrete()}}, \code{\link[=guide_tintshade]{guide_tintshade()}}
