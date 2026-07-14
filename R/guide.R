@@ -115,7 +115,8 @@ recolour_key <- function(key, cache, crossed, type) {
 #'     hue-independent).
 #'   * `"unique"`: always use the hue.
 #'   * `"crossed"`: always use neutral grey.
-#' @param ... Passed to [ggplot2::guide_legend()].
+#' @inheritParams ggplot2::guide_legend
+#' @param ... Additional arguments passed on to [ggplot2::new_guide()].
 #'
 #' @return A guide object.
 #' @seealso [scale_tintshade_discrete()]
@@ -128,10 +129,15 @@ recolour_key <- function(key, cache, crossed, type) {
 #'   geom_col_tintshade(position = "dodge") +
 #'   guides(tintshade = guide_tintshade(type = "crossed"))
 guide_tintshade <- function(title = ggplot2::waiver(),
-                            type = c("auto", "unique", "crossed"), ...) {
+                            type = c("auto", "unique", "crossed"),
+                            theme = NULL, position = NULL, direction = NULL,
+                            override.aes = list(), nrow = NULL, ncol = NULL,
+                            reverse = FALSE, order = 0, ...) {
   type <- match.arg(type)
   ggplot2::new_guide(
-    title = title, tintshade_type = type, available_aes = "tintshade",
-    name = "tintshade", super = GuideTintshade
+    title = title, theme = theme, position = position, direction = direction,
+    override.aes = override.aes, nrow = nrow, ncol = ncol, reverse = reverse,
+    order = order, tintshade_type = type, available_aes = "tintshade",
+    name = "tintshade", super = GuideTintshade, ...
   )
 }
