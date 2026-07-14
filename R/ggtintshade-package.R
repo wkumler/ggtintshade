@@ -6,6 +6,11 @@
 #' grouped, nested, and crossed designs where not all colors should be equally
 #' distinct.
 #'
+#' Most `ggplot2` geoms have a `tintshade` equivalent, distinguished by adding
+#' the `_ggtintshade` suffix (e.g. `geom_point` -> `geom_point_tintshade`).
+#' Additional geoms are easily added by editing the `geoms.R` script or by
+#' submitting a Github issue (link below) with the new geom.
+#'
 #' @keywords internal
 "_PACKAGE"
 

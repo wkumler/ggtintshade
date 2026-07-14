@@ -14,6 +14,11 @@ typical \code{ggplot2} plots that allows colors to be lightened/darkened by
 mapping the saturation/value coordinates as well as the hue. This allows for
 grouped, nested, and crossed designs where not all colors should be equally
 distinct.
+
+Most \code{ggplot2} geoms have a \code{tintshade} equivalent, distinguished by adding
+the \verb{_ggtintshade} suffix (e.g. \code{geom_point} -> \code{geom_point_tintshade}).
+Additional geoms are easily added by editing the \code{geoms.R} script or by
+submitting a Github issue (link below) with the new geom.
 }
 \seealso{
 Useful links:
