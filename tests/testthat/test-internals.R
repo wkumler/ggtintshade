@@ -10,8 +10,8 @@ test_that("factory makes new geom", {
 
 test_that("constructor works correctly", {
   geom_point_tintshade <- make_geom_constructor(GeomPointTintshade)
-  expect_contains(formals("geom_point_tintshade"), "mapping")
-  expect_contains(formals("geom_point_tintshade"), "data")
+  expect_contains(names(formals("geom_point_tintshade")), "mapping")
+  expect_contains(names(formals("geom_point_tintshade")), "data")
   expect_identical(formals("geom_point_tintshade")$stat, "identity")
   expect_identical(formals("geom_point_tintshade")$position, "identity")
 })
