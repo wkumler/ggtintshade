@@ -5,3 +5,5 @@ tintshade_minimal.R
 demo_test_figs.R
 README.Rmd
 ^\.github$
+^CRAN-SUBMISSION$
+^cran-comments\.md$
