@@ -5,20 +5,20 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/wkumler/ggtintshade/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/wkumler/ggtintshade/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/wkumler/ggtintshade/graph/badge.svg)](https://app.codecov.io/gh/wkumler/ggtintshade)
-[![R-CMD-check](https://github.com/wkumler/ggtintshade/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/wkumler/ggtintshade/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 `ggtintshade` is an extension to the `ggplot2` plotting library that
 allows for the tint/shade of a color to be mapped to an aesthetic in
-addition to its hue (color). This allows for visual grouping of similar
-points in color space while still allowing a color legend to
-disambiguate them overall. It supports both nested and crossed designs.
+addition to its hue. This permits visual grouping of similar points in
+color space while still allowing a color legend to disambiguate them
+overall. It supports both nested and crossed designs.
 
 ## Installation
 
-You can install the most recent stable version of gghtintshade from CRAN
+You can install the most recent stable version of ggtintshade from CRAN
 (soon!) as follows:
 
 ``` r
@@ -211,7 +211,8 @@ aesthetic separately and does not like allowing them to interact in this
 way. We get around this issue first by creating a cache that’s passed
 around in the `ggproto` object and then we (ab)use the `use_defaults`
 step where all the necessary information is available. For more details
-about this, see the \[internals vignette\].
+about this, see the [internals
+vignette](https://cran.r-project.org/package=ggtintshade/vignettes/ggtintshade-internals.html).
 
 `ggtintshade` uses `colorspace::lighten` to actually modify the colors,
 so review the documentation there for more information about how the
