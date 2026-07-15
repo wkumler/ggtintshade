@@ -4,9 +4,9 @@
 \name{ggtintshade-package}
 \alias{ggtintshade}
 \alias{ggtintshade-package}
-\title{ggtintshade: Tinting and shading aesthetics for ggplot2}
+\title{ggtintshade: Tinting and Shading Aesthetics for 'ggplot2'}
 \description{
-Adds a 'tintshade' aesthetic to 'ggplot2' that varies the lightness of a mapped 'colour' or 'fill' within each hue group, keeping the plotted layer and its legend in sync. Supports both nested designs (each item belongs to one hue) and crossed designs (each lightness level appears across hues), the latter shown with a neutral greyscale legend.
+Adds a 'tintshade' aesthetic to 'ggplot2' that varies the lightness of a mapped 'colour' or 'fill' within each hue group, keeping the plotted layer and its legend in sync. Supports both nested designs (each item belongs to one hue) and crossed designs (each lightness level appears across hues).
 }
 \details{
 The \code{ggtintshade} package is designed to provide an additional aesthetic to

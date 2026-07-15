@@ -1,14 +1,14 @@
 Package: ggtintshade
 Type: Package
-Title: Tinting and shading aesthetics for ggplot2
-Version: 0.1.1
+Title: Tinting and Shading Aesthetics for 'ggplot2'
+Version: 0.1.2
 Authors@R:
     person("William", "Kumler", , "wkumler@uw.edu", role = c("aut", "cre"))
 Description: Adds a 'tintshade' aesthetic to 'ggplot2' that varies the
     lightness of a mapped 'colour' or 'fill' within each hue group, keeping
     the plotted layer and its legend in sync. Supports both nested designs
     (each item belongs to one hue) and crossed designs (each lightness level
-    appears across hues), the latter shown with a neutral greyscale legend.
+    appears across hues).
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
