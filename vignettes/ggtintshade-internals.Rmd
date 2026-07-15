@@ -29,13 +29,13 @@ The hack has two parts:
    geom is built and carried along on the `ggproto` object, so there is no
    shared or global state.
 2. **The (ab)use of `use_defaults`.** This is a late step in `ggplot_build()`
-   where the *mapped* colors and the *mapped* tintshade values are finally
+   where the mapped colors and the mapped tintshade values are finally
    available side by side. There we compute each point's tint, recolor the
    points, and record the final color in the cache keyed by its tintshade
    value. The guide later reads those colors back when it draws the legend.
 
-This vignette rebuilds a stripped-down `geom_point_tintshade` — all names
-suffixed `_demo` so nothing shadows the real package — to show the mechanism.
+This vignette rebuilds the following plot using a stripped-down 
+`geom_point_tintshadedemo` to show the general mechanism.
 
 ```{r}
 library(ggplot2)
@@ -62,7 +62,7 @@ shared or global state to worry about. The environment is attached to a
 per-layer `ggproto` instance.
 
 ```{r}
-geom_point_tintshade_demo <- function(mapping = NULL, data = NULL, ..., size = NULL) {
+geom_point_tintshadedemo <- function(mapping = NULL, data = NULL, ..., size = NULL) {
   cache <- new.env(parent = emptyenv())
   cache$lookup <- character(0)
 
@@ -79,8 +79,8 @@ geom_point_tintshade_demo <- function(mapping = NULL, data = NULL, ..., size = N
 
 `use_defaults()` is called (at least) twice during `ggplot_build()`: once for the
 panel data and once for the legend key. We only want to touch the panel data, so
-we skip the legend key — it carries a `.id` column, which the panel data does
-not.
+we skip the legend key. The legend has an `.id` column, which the panel data does
+not, so we use that to disambiguate them.
 
 Inside, we rank each point's tintshade value within its color group, spread
 those ranks across the tintshade range, and feed the result to
@@ -102,31 +102,36 @@ GeomPointTintshadeDemo <- ggproto("GeomPointTintshadeDemo", GeomPoint,
   use_defaults = function(self, data, params = list(), ...) {
     data <- ggproto_parent(GeomPoint, self)$use_defaults(data, params, ...)
 
-    if (!is.null(self$tintshade_cache) && is.null(data$.id) && !is.null(data$tintshade)) {
-      t <- local_tint(data$colour, data$tintshade)
+    if (!is.null(self$tintshade_cache) && is.null(data$.id) && !is.null(data$tintshadedemo)) {
+      t <- local_tint(data$colour, data$tintshadedemo)
       data$colour <- colorspace::lighten(data$colour, 2 * t - 1)   # 0.5 -> no change
-      self$tintshade_cache$lookup[sprintf("%.10f", data$tintshade)] <- data$colour
+      self$tintshade_cache$lookup[sprintf("%.10f", data$tintshadedemo)] <- data$colour
     }
     data
   }
 )
-GeomPointTintshadeDemo$default_aes$tintshade <- NA   # register the new aesthetic
+GeomPointTintshadeDemo$default_aes$tintshadedemo <- NA   # register the new aesthetic
+
+scale_tintshadedemo_discrete <- function(..., range = c(0.2, 0.8)) {
+  discrete_scale("tintshadedemo", palette = function(n) seq(range[1], range[2], length.out = n))
+}
 ```
 
-With just this, the panel is correctly tinted but the scale is incorrect 
-because we haven't yet defined the guide.
+With just this, the panel is correctly tinted but the legend is incorrect 
+because we haven't yet defined the guide so it defaults to the solid black entries.
 
 ```{r}
 ggplot(metab_data) +
-  aes(x = tripl, y = area, color = metab_group, tintshade = metab) +
-  geom_point_tintshade_demo(size = 4)
+  aes(x = tripl, y = area, color = metab_group, tintshadedemo = metab) +
+  geom_point_tintshadedemo(size = 4)
 ```
 
 ## Reading the cache back in the guide
 
 The guide has two parts. In `get_layer_key()` we grab the layer's cache and stash
 it on the guide's `params`. In `draw()`, which runs after the build has filled
-the cache, we look up each key's tintshade value and recolor it.
+the cache, we look up each key's tintshade value and recolor it. We also redefine
+the default scale (constructed from the aesthetic name) to use the new guide.
 
 ```{r}
 GuideTintshadeDemo <- ggproto("GuideTintshadeDemo", GuideLegend,
@@ -138,26 +143,32 @@ GuideTintshadeDemo <- ggproto("GuideTintshadeDemo", GuideLegend,
   draw = function(self, theme, position = NULL, direction = NULL, params = self$params) {
     keys <- params$decor[[1]]$data
     params$decor[[1]]$data$colour <-
-      params$tintshade_cache$lookup[sprintf("%.10f", keys$tintshade)]
+      params$tintshade_cache$lookup[sprintf("%.10f", keys$tintshadedemo)]
     ggproto_parent(GuideLegend, self)$draw(theme, position, direction, params)
   }
 )
 
-guide_tintshade_demo <- function(...) {
-  new_guide(..., available_aes = "tintshade", super = GuideTintshadeDemo)
+guide_tintshadedemo <- function(...) {
+  new_guide(..., available_aes = "tintshadedemo", super = GuideTintshadeDemo)
+}
+
+scale_tintshadedemo_discrete <- function(..., range = c(0.2, 0.8)) {
+  discrete_scale("tintshadedemo", palette = function(n) seq(range[1], range[2], length.out = n),
+                 guide = guide_tintshadedemo())
 }
 ```
 
-Attach the guide with `guides()` and the legend keys now match the points: both
-were colored from the same cache. (The auto-added scale still handles the
-label-to-number mapping; we only swap its guide.)
+And we have our expected behavior.
 
 ```{r}
 ggplot(metab_data) +
-  aes(x = tripl, y = area, color = metab_group, tintshade = metab) +
-  geom_point_tintshade_demo(size = 4) +
-  guides(tintshade = guide_tintshade_demo())
+  aes(x = tripl, y = area, color = metab_group, tintshadedemo = metab) +
+  geom_point_tintshadedemo(size = 4)
 ```
 
-The real package generalises this in a few ways and adds some additional 
+The real package generalizes this in a few ways and adds some additional 
 functionality but the two-part hack is the one shown here.
+
+-----------------------------------------
+
+Vignette last built on `r Sys.Date()`
