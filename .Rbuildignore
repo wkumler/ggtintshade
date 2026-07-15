@@ -1,8 +1,9 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-
 tintshade_minimal.R
 demo_test_figs.R
+gallery_fig_script.R
+gallery_fig.png
 README.Rmd
 ^\.github$
 ^CRAN-SUBMISSION$
