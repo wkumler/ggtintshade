@@ -1,3 +1,9 @@
+## Test environments
+* local R installation, R 4.5.1
+* windows-latest (release) (via GitHub Actions)
+* macOS-latest (release) (via GitHub Actions)
+* ubuntu-latest (release) (via GitHub Actions)
+
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note
