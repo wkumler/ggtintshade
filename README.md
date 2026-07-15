@@ -3,6 +3,13 @@
 
 # ggtintshade: Tinting/shading aesthetics for ggplot2
 
+<!-- badges: start -->
+
+[![Codecov test
+coverage](https://codecov.io/gh/wkumler/ggtintshade/graph/badge.svg)](https://app.codecov.io/gh/wkumler/ggtintshade)
+[![R-CMD-check](https://github.com/wkumler/ggtintshade/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/wkumler/ggtintshade/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 `ggtintshade` is an extension to the `ggplot2` plotting library that
 allows for the tint/shade of a color to be mapped to an aesthetic in
 addition to its hue (color). This allows for visual grouping of similar
@@ -218,4 +225,4 @@ they inherit naturally from an existing `ggplot2` function.
 
 Issues: <https://github.com/wkumler/ggtintshade/issues>
 
-README last built on 2026-07-14
+README last built on 2026-07-15
