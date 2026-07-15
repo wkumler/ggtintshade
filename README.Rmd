@@ -24,6 +24,7 @@ library(patchwork)
 
 <!-- badges: start -->
 [![Codecov test coverage](https://codecov.io/gh/wkumler/ggtintshade/graph/badge.svg)](https://app.codecov.io/gh/wkumler/ggtintshade)
+[![R-CMD-check](https://github.com/wkumler/ggtintshade/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/wkumler/ggtintshade/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 
