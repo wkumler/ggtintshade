@@ -4,3 +4,4 @@
 tintshade_minimal.R
 demo_test_figs.R
 README.Rmd
+^\.github$

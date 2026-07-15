@@ -22,6 +22,11 @@ library(patchwork)
 
 # ggtintshade: Tinting/shading aesthetics for ggplot2
 
+<!-- badges: start -->
+[![Codecov test coverage](https://codecov.io/gh/wkumler/ggtintshade/graph/badge.svg)](https://app.codecov.io/gh/wkumler/ggtintshade)
+<!-- badges: end -->
+
+
 `ggtintshade` is an extension to the `ggplot2` plotting library that allows for the tint/shade of a color to be mapped to an aesthetic in addition to its hue (color). This allows for visual grouping of similar points in color space while still allowing a color legend to disambiguate them overall. It supports both nested and crossed designs.
 
 ## Installation
