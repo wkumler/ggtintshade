@@ -26,7 +26,9 @@ Suggests:
     gtable,
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0)
+    patchwork,
+    testthat (>= 3.0.0),
+    vdiffr
 Config/testthat/edition: 3
 URL: https://github.com/wkumler/ggtintshade
 BugReports: https://github.com/wkumler/ggtintshade/issues
