@@ -211,8 +211,7 @@ aesthetic separately and does not like allowing them to interact in this
 way. We get around this issue first by creating a cache that’s passed
 around in the `ggproto` object and then we (ab)use the `use_defaults`
 step where all the necessary information is available. For more details
-about this, see the [internals
-vignette](https://cran.r-project.org/package=ggtintshade/vignettes/ggtintshade-internals.html).
+about this, see the \[internals vignette\].
 
 `ggtintshade` uses `colorspace::lighten` to actually modify the colors,
 so review the documentation there for more information about how the
